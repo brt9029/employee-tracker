@@ -22,7 +22,7 @@ async function initialPrompt() {
             if(selection.option === 'View all departments'){
                 return db.promise().query(`SELECT * FROM department`)
                     .then(([rows, fields]) => {
-                        console.log(rows);
+                        console.table(rows);
                     })
                     .catch(console.log)
                     .then( () => {
@@ -31,22 +31,71 @@ async function initialPrompt() {
                     });
             }
             if(selection.option === 'View all roles'){
-                return viewRoles();
+                return db.promise().query(`SELECT * FROM role`)
+                    .then(([rows, fields]) => {
+                        console.table(rows);
+                    })
+                    .catch(console.log)
+                    .then( () => {
+                        db.end()
+                        initialPrompt();
+                    });
             }
             if(selection.option === 'View all employees'){
-                return viewEmployees();
+                return db.promise().query(`SELECT * FROM employee`)
+                    .then(([rows, fields]) => {
+                        console.table(rows);
+                    })
+                    .catch(console.log)
+                    .then( () => {
+                        db.end()
+                        initialPrompt();
+                    });
             }
             if(selection.option === 'Add a department'){
-                return addDepartment();
+                return db.promise().query(`INSERT * INTO department (name)
+                                            VALUES(?)`)
+                    .then(([rows, fields]) => {
+                        console.table(rows);
+                    })
+                    .catch(console.log)
+                    .then( () => {
+                        db.end()
+                        initialPrompt();
+                    });
             }
             if(selection.option === 'Add a role'){
-                return addRole();
+                return db.promise().query(`SELECT * FROM department`)
+                    .then(([rows, fields]) => {
+                        console.table(rows);
+                    })
+                    .catch(console.log)
+                    .then( () => {
+                        db.end()
+                        initialPrompt();
+                    });
             }
             if(selection.option === 'Add an employee'){
-                return addEmployee();
+                return db.promise().query(`SELECT * FROM department`)
+                    .then(([rows, fields]) => {
+                        console.table(rows);
+                    })
+                    .catch(console.log)
+                    .then( () => {
+                        db.end()
+                        initialPrompt();
+                    });
             }
             if(selection.option === 'Update an employee role'){
-                return updateEmployee();
+                return db.promise().query(`SELECT * FROM department`)
+                    .then(([rows, fields]) => {
+                        console.table(rows);
+                    })
+                    .catch(console.log)
+                    .then( () => {
+                        db.end()
+                        initialPrompt();
+                    });
             }
         })
 }
