@@ -1,18 +1,23 @@
 const db = require('../db/connection');
 
-// Create a new department
+// ADD a new department
 function addDepartment(response) {
-
+    db.query(`INSERT INTO departments (name) VALUES (?)`, response.department, (err, row) => {
+        if (err) {
+            console.log(err);
+        }
+        console.log(`${response.department} was added successfully!`);
+        return;
+    });
 };
 
-// Get all departments
+// GET all departments
 function departmentView() {
     db.query(`SELECT * FROM departments`, (err, rows) => {
         if (err) {
             console.log(err);
         }
         console.log('');
-        console.log('View all departments');
         console.table(rows);
     });
 };
