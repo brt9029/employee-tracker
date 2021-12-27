@@ -5,3 +5,9 @@ VALUES
   ('Robert', 'Bruce', 2, 1),
   ('Derek', 'Jarman', 3, 3),
   ('Heathcote', 'Williams', 1, 2);
+
+  INSERT INTO department (name)
+  VALUES
+    ('Human Resources'),
+    ('Accounting'),
+    ('Sales');
