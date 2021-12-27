@@ -1,4 +1,4 @@
 require('dotenv').config()
-const initialPrompt = require('./routes');
+const start = require('./routes');
 
-initialPrompt();
+start();
