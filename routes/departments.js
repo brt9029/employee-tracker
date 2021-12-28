@@ -6,8 +6,7 @@ function addDepartment(response) {
         if (err) {
             console.log(err);
         }
-        console.log(`${response.department} was added successfully!`);
-        return;
+        console.log(`New department was added successfully!`);
     });
 };
 
