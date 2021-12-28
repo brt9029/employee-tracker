@@ -15,8 +15,9 @@ function employeeView() {
         console.log('Showing all employees');
         console.table(rows);
     });
-}
+};
 
 module.exports = {
-    employeeView
+    employeeView,
+    addEmployee
 };

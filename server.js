@@ -2,8 +2,8 @@ require('dotenv').config()
 const inquirer = require('inquirer');
 const db = require('./db/connection');
 const { departmentView, addDepartment } = require('./routes/departments');
-const { employeeView } = require('./routes/employees');
-const { roleView } = require('./routes/roles');
+const { employeeView, addEmployee } = require('./routes/employees');
+const { roleView, addRole } = require('./routes/roles');
 
 function initialPrompt() {
     return inquirer
@@ -32,8 +32,47 @@ function optionSelect(option) {
         case 'Add a department':
             newDepartment();
             break;
+        case 'Add a role':
+            newRole();
+            break;
+        case 'Add an employee':
+            newEmployee();
+            break;
     }
-}
+};
+
+function newRole() {
+    let selection = []
+    db.query(`SELECT * FROM departments`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        rows.forEach(row => selection.push(row.name));
+    });
+    return inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'Enter the title for the new role'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Enter the salary for this role (numbers only)'
+        },
+        {
+            type: 'list',
+            name: 'department',
+            message: 'Designate a department for this role',
+            choices: selection
+        }
+    ])
+    .then(response => {
+        addRole(response);
+        return start();
+    })
+};
 
 function newDepartment(){
     return inquirer
@@ -52,6 +91,6 @@ function start() {
     .then(response => {
         optionSelect(response);
     })
-}
+};
 
 start();
