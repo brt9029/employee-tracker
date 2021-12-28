@@ -69,7 +69,7 @@ function newRole() {
         }
     ])
     .then(response => {
-        addRole(response);
+        addRole(response, selection);
         return start();
     })
 };
