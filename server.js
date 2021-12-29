@@ -41,6 +41,54 @@ function optionSelect(option) {
     }
 };
 
+function newEmployee() {
+    let roles = [];
+    db.query(`SELECT * FROM roles`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        rows.forEach(row => roles.push(row.title));
+    });
+
+    // let managers = [];
+    // db.query(`SELECT * FROM employees`, (err, rows) => {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     rows.forEach(row => managers.push(row.name));
+    // });
+
+    return inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'first',
+                message: "What is the employee's first name?"
+            },
+            {
+                type: 'input',
+                name: 'last',
+                message: "What is the employee's last name?"
+            },
+            {
+                type: 'list',
+                name: 'role',
+                message: "What is the employee's role?",
+                choices: roles
+            }//,
+            // {
+            //     type: 'list',
+            //     name: 'manager',
+            //     message: "Who is the employee's manager?",
+            //     choices: managers
+            // },
+        ])
+        .then(response => {
+            addEmployee(response, roles, managers);
+            return start();
+        })
+};
+
 function newRole() {
     let selection = []
     db.query(`SELECT * FROM departments`, (err, rows) => {
@@ -71,7 +119,7 @@ function newRole() {
     .then(response => {
         addRole(response, selection);
         return start();
-    })
+    });
 };
 
 function newDepartment(){
@@ -87,7 +135,7 @@ function newDepartment(){
 };
 
 function start() {
-    initialPrompt()
+    return initialPrompt()
     .then(response => {
         optionSelect(response);
     })
