@@ -2,7 +2,7 @@ require('dotenv').config()
 const inquirer = require('inquirer');
 const db = require('./db/connection');
 const { departmentView, addDepartment } = require('./routes/departments');
-const { employeeView, addEmployee } = require('./routes/employees');
+const { employeeView, addEmployee, updateEmployee } = require('./routes/employees');
 const { roleView, addRole } = require('./routes/roles');
 
 function initialPrompt() {
@@ -45,6 +45,7 @@ function optionSelect(option) {
 };
 
 function getEmployee() {
+    // GETS current list of employees
     let employeeTable = [];
     db.query(`SELECT * FROM employees`, (err, rows) => {
         if (err) {
@@ -52,30 +53,38 @@ function getEmployee() {
         }
         rows.forEach(row => employeeTable.push(row.first_name + " " + row.last_name));
     });
-
+    // GETS list of current roles
     let roleTable = [];
     db.query(`SELECT * FROM roles`, (err, rows) => {
         if (err) {
             console.log(err);
         }
-        rows.forEach(row => roleTable.push(row.title))
+        rows.forEach(row => roleTable.push(row.title));
     });
-
     return inquirer
         .prompt([
             {
+                type: 'input',
+                name: 'placeholder',
+                message: "Press enter to retrieve current list of employees"
+            },
+            {
                 type: 'list',
-                name: 'employeeList',
+                name: 'employees',
                 message: "Which employee's role would you like to update?",
                 choices: employeeTable
             },
             {
                 type: 'list',
-                name: 'roleList',
+                name: 'roles',
                 message: "What is the new role for this employee?",
                 choices: roleTable
             }
         ])
+        .then(response => {
+            updateEmployee(response, employeeTable, roleTable);
+            return start();
+        })
 };
 
 function newEmployee() {
@@ -86,7 +95,6 @@ function newEmployee() {
         }
         rows.forEach(row => roles.push(row.title));
     });
-
     let managers = [];
     db.query(`SELECT * FROM employees`, (err, rows) => {
         if (err) {
