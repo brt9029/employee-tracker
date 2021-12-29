@@ -50,13 +50,13 @@ function newEmployee() {
         rows.forEach(row => roles.push(row.title));
     });
 
-    // let managers = [];
-    // db.query(`SELECT * FROM employees`, (err, rows) => {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     rows.forEach(row => managers.push(row.name));
-    // });
+    let managers = [];
+    db.query(`SELECT * FROM employees`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        rows.forEach(row => managers.push(row.first_name + " " + row.last_name));
+    });
 
     return inquirer
         .prompt([
@@ -75,13 +75,13 @@ function newEmployee() {
                 name: 'role',
                 message: "What is the employee's role?",
                 choices: roles
-            }//,
-            // {
-            //     type: 'list',
-            //     name: 'manager',
-            //     message: "Who is the employee's manager?",
-            //     choices: managers
-            // },
+            },
+            {
+                type: 'list',
+                name: 'manager',
+                message: "Who is the employee's manager?",
+                choices: managers
+            },
         ])
         .then(response => {
             addEmployee(response, roles, managers);
@@ -131,6 +131,7 @@ function newDepartment(){
     })
     .then(response => {
         addDepartment(response);
+        return start();
     });
 };
 
