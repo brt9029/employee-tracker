@@ -1,5 +1,10 @@
 const db = require('../db/connection');
 
+// UPDATE existing employee
+function updateEmployee() {
+    
+}
+
 // ADD new employee
 function addEmployee(response, roles, managers) {
     const role_id = roles.indexOf(response.role) + 1;
@@ -31,5 +36,6 @@ function employeeView() {
 
 module.exports = {
     employeeView,
-    addEmployee
+    addEmployee,
+    updateEmployee
 };
