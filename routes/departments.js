@@ -1,5 +1,4 @@
 const db = require('../db/connection');
-const cTable = require('console.table');
 
 // ADD a new department
 function addDepartment(response) {
