@@ -9,7 +9,7 @@
 - Start the app with ```node start```
 
 ## Usage
-- When the application is started you will be given the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
+- When the application is started you will be given the following options: ```view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role```
 - When choosing to view all departments, you will be presented with a formatted table showing department names and department ids
 - When choosing to view all roles, you will be presented with the job title, role id, the department that role belongs to, and the salary for that role
 - When choosing to view all employees, you will be presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
