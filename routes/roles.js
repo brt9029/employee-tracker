@@ -11,7 +11,6 @@ function addRole(response, selection) {
             console.log(err);
         }
         console.log('');
-        console.log(index);
         console.log('New Role has been added!');
     });
 };
@@ -23,7 +22,7 @@ function roleView() {
             console.log(err)
         }
         console.log('');
-        console.log('View all roles');
+        console.log('Displaying all roles');
         console.table(rows);
     });
 };

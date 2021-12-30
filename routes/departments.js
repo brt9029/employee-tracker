@@ -1,4 +1,5 @@
 const db = require('../db/connection');
+const cTable = require('console.table');
 
 // ADD a new department
 function addDepartment(response) {
@@ -11,7 +12,7 @@ function addDepartment(response) {
 };
 
 // GET all departments
-function departmentView() {
+async function departmentView() {
     db.query(`SELECT * FROM departments`, (err, rows) => {
         if (err) {
             console.log(err);

@@ -1,6 +1,7 @@
 require('dotenv').config()
 const inquirer = require('inquirer');
 const db = require('./db/connection');
+const cTable = require('console.table');
 const { departmentView, addDepartment } = require('./routes/departments');
 const { employeeView, addEmployee, updateEmployee } = require('./routes/employees');
 const { roleView, addRole } = require('./routes/roles');
@@ -180,7 +181,7 @@ function newDepartment(){
     });
 };
 
-function start() {
+async function start() {
     return initialPrompt()
     .then(response => {
         optionSelect(response);
