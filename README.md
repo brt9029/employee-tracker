@@ -18,7 +18,7 @@
 - When choosing to ```add an employee```, you will be prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 - When choosing to ```update an existing employee's role```, you will be prompted to select an employee to update and their new role and this information is updated in the database
 
-- Video Walkthrough: Coming soon!
+- Video Walkthrough: https://watch.screencastify.com/v/gwsoer8oZYn4NdkmTTHT
 
 ## Credits
 - Created by: [brt9029](www.github.com/brt9029 "GitHub Profile Link")
